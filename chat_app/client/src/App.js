@@ -6,7 +6,6 @@ import DashboardPage from "./Pages/DashboardPage";
 import IndexPage from "./Pages/IndexPage";
 import ChatroomPage from "./Pages/ChatroomPage";
 import io from "socket.io-client";
-import makeToast from "./Toaster.js";
 
 function App() {
   const [socket, setSocket] = React.useState(null);
@@ -24,12 +23,8 @@ function App() {
       newSocket.on("disconnect", () => {
         setSocket(null);
         setTimeout(setupSocket, 3000);
-        makeToast("error", "Socket Disconnected!");
       });
 
-      newSocket.on("connect", () => {
-        makeToast("success", "Socket Connected!");
-      });
 
       setSocket(newSocket);
     }
@@ -37,7 +32,6 @@ function App() {
 
   React.useEffect(() => {
     setupSocket();
-    //eslint-disable-next-line
   }, []);
 
   return (
